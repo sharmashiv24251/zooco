@@ -82,7 +82,7 @@ export default function InstallPrompt() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end justify-center p-4"
+        className="fixed inset-0 bg-black/20 backdrop-blur-2xl bg-opacity-50 z-50 flex items-end justify-center p-4"
         onClick={handleClose}
       >
         {/* Dialog */}
@@ -94,7 +94,7 @@ export default function InstallPrompt() {
           <div className="flex justify-between items-center p-6 pb-4">
             <div className="flex items-center space-x-3">
               <div className="bg-blue-100 p-2 rounded-full">
-                <Smartphone className="w-6 h-6 text-blue-600" />
+                <Smartphone className="w-6 h-6 text-green-600" />
               </div>
               <h2 className="text-xl font-semibold text-gray-900">
                 Install Zooco.pet
@@ -138,7 +138,7 @@ export default function InstallPrompt() {
             <div className="space-y-3">
               <button
                 onClick={handleInstallClick}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center space-x-2 shadow-lg"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center space-x-2 shadow-lg"
               >
                 <Download className="w-5 h-5" />
                 <span>Install App</span>
