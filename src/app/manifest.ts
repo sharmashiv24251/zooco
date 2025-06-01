@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Next.js PWA',
-    short_name: 'NextPWA',
-    description: 'A Progressive Web App built with Next.js',
+    name: 'Zooco.pet',
+    short_name: 'Zooco',
+    description: 'Reminder / Tracker for your dogs',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
@@ -22,6 +22,6 @@ export default function manifest(): MetadataRoute.Manifest {
       "type": "image/png"
     }
   ],
-  
+
   }
 }
