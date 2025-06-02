@@ -7,11 +7,15 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
 
+const DISMISS_KEY = "zooco_install_prompt_dismissed";
+const DISMISS_DURATION_MS = 5 * 60 * 1000; // 5 minutes
+
 export default function InstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     const checkMobile = () => {
       const userAgent =
@@ -29,19 +33,26 @@ export default function InstallPrompt() {
     setIsMobile(checkMobile());
 
     const handler = (e: Event) => {
-      const event = e as BeforeInstallPromptEvent; // Safe cast inside the function
+      const event = e as BeforeInstallPromptEvent;
 
       if (!checkMobile()) return;
+
+      // Check if recently dismissed
+      const dismissedAt = localStorage.getItem(DISMISS_KEY);
+      if (
+        dismissedAt &&
+        Date.now() - parseInt(dismissedAt, 10) < DISMISS_DURATION_MS
+      ) {
+        return;
+      }
+
       event.preventDefault();
       setDeferredPrompt(event);
       setTimeout(() => setShowPrompt(true), 1000);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
-
-    return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
-    };
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   const handleInstallClick = async () => {
@@ -51,46 +62,40 @@ export default function InstallPrompt() {
     }
 
     try {
-      // Show the browser's install prompt
       await deferredPrompt.prompt();
-
-      // Wait for the user to respond to the prompt
       const { outcome } = await deferredPrompt.userChoice;
 
       if (outcome === "accepted") {
         console.log("User accepted the install prompt.");
       } else {
         console.log("User dismissed the install prompt.");
+        localStorage.setItem(DISMISS_KEY, Date.now().toString());
       }
     } catch (error) {
       console.error("Error showing install prompt:", error);
     }
 
-    // Hide the dialog after the prompt has been shown
     handleClose();
   };
 
   const handleClose = () => {
+    localStorage.setItem(DISMISS_KEY, Date.now().toString());
     setShowPrompt(false);
     setDeferredPrompt(null);
   };
 
-  // Don't render if not mobile or prompt shouldn't show
   if (!isMobile || !showPrompt) return null;
 
   return (
     <>
-      {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/20 backdrop-blur-2xl bg-opacity-50 z-50 flex items-end justify-center p-4"
+        className="fixed inset-0 bg-black/20 backdrop-blur-2xl bg-opacity-50 z-50 flex items-end justify-center px-4"
         onClick={handleClose}
       >
-        {/* Dialog */}
         <div
           className="bg-white rounded-t-3xl w-full max-w-md transform transition-all duration-300 ease-out animate-slide-up"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
           <div className="flex justify-between items-center p-6 pb-4">
             <div className="flex items-center space-x-3">
               <div className="bg-green-100 p-2 rounded-full">
@@ -109,14 +114,12 @@ export default function InstallPrompt() {
             </button>
           </div>
 
-          {/* Content */}
           <div className="px-6 pb-6">
             <p className="text-gray-600 mb-6 leading-relaxed">
               Get the full Zooco.pet experience! Install our app for faster
               access, offline features, and push notifications.
             </p>
 
-            {/* Benefits */}
             <div className="space-y-3 mb-8">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -134,7 +137,6 @@ export default function InstallPrompt() {
               </div>
             </div>
 
-            {/* Actions */}
             <div className="space-y-3">
               <button
                 onClick={handleInstallClick}

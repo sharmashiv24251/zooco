@@ -65,12 +65,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full flex flex-col`}
       >
-        <InstallPrompt />
-        <div className="px-6 py-4.5 ">{children}</div>
+        {/* <InstallPrompt /> */}
+        <div className="flex-1">{children}</div>
         <Nav />
       </body>
     </html>
