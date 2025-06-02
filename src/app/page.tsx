@@ -77,7 +77,7 @@ export default function HomePage() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="absolute bottom-8 left-0 right-0 flex justify-center"
+          className="absolute bottom-18 left-0 right-0 flex justify-center"
         >
           <motion.div
             animate={{ y: [0, -10, 0] }}
