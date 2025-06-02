@@ -138,7 +138,7 @@ export default function InstallPrompt() {
             <div className="space-y-3">
               <button
                 onClick={handleInstallClick}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center space-x-2 shadow-lg"
+                className="w-full bg-green-600 hover:bg-green-700 text-white cursor-pointer font-semibold py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center space-x-2 shadow-lg"
               >
                 <Download className="w-5 h-5" />
                 <span>Install App</span>
