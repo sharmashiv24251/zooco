@@ -93,7 +93,7 @@ export default function InstallPrompt() {
           {/* Header */}
           <div className="flex justify-between items-center p-6 pb-4">
             <div className="flex items-center space-x-3">
-              <div className="bg-blue-100 p-2 rounded-full">
+              <div className="bg-green-100 p-2 rounded-full">
                 <Smartphone className="w-6 h-6 text-green-600" />
               </div>
               <h2 className="text-xl font-semibold text-gray-900">
