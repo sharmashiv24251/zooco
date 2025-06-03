@@ -5,6 +5,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { AvatarFallback } from "@/components/ui/avatar";
 import { Calendar, Clock } from "lucide-react";
 import DeleteButton from "@/components/delete-button";
+import ReminderCard from "@/components/reminder-card";
 
 interface PageProps {
   params: { id: string };
@@ -51,22 +52,7 @@ const PetDetailPage = async ({ params }: PageProps) => {
           ) : (
             <div className="space-y-4">
               {data.reminders.map((reminder) => (
-                <div
-                  key={reminder.id}
-                  className="border rounded-lg p-4 space-y-2"
-                >
-                  <h3 className="font-medium text-lg">{reminder.title}</h3>
-                  <div className="flex gap-4 text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Calendar size={16} />
-                      {reminder.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock size={16} />
-                      {reminder.time}
-                    </span>
-                  </div>
-                </div>
+                <ReminderCard key={reminder.id} reminder={reminder} isPetPage />
               ))}
             </div>
           )}
