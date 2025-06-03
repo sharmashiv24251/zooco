@@ -1,18 +1,6 @@
+import ReminderCard from "@/components/reminder-card";
 import { fetchReminders } from "@/lib/network";
 import { format } from "date-fns";
-
-function formatTime(timeString: string) {
-  try {
-    // Convert "HH:mm" format to a valid date
-    const [hours, minutes] = timeString.split(":");
-    const date = new Date();
-    date.setHours(parseInt(hours), parseInt(minutes));
-    return format(date, "h:mm a");
-  } catch (error) {
-    console.error("Error formatting time:", error);
-    return "Invalid time";
-  }
-}
 
 export default async function RemindersPage() {
   const { data: reminders = [], error } = await fetchReminders();
@@ -73,23 +61,7 @@ export default async function RemindersPage() {
             reminders
               .filter((reminder) => reminder.status === "pending")
               .map((reminder) => (
-                <div
-                  key={reminder.id}
-                  className="bg-white rounded-2xl shadow p-5 flex items-center justify-between border border-gray-200"
-                >
-                  <div>
-                    <p className="text-xl font-semibold text-gray-800">
-                      {reminder.title}
-                    </p>
-                    <p className="text-sm text-gray-500 mt-1">
-                      For {reminder.pet?.name || "Unknown"} •{" "}
-                      {formatTime(reminder.time)} • {reminder.frequency}
-                    </p>
-                  </div>
-                  <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-sm">
-                    ✓
-                  </div>
-                </div>
+                <ReminderCard key={reminder.id} reminder={reminder} />
               ))}
           {reminders &&
             reminders.filter((r) => r.status === "pending").length === 0 && (
@@ -108,12 +80,7 @@ export default async function RemindersPage() {
           {reminders
             .filter((r) => r.status === "completed")
             .map((reminder) => (
-              <div
-                key={reminder.id}
-                className="bg-white px-5 py-4 rounded-2xl line-through text-gray-500 text-base shadow-inner"
-              >
-                {reminder.title}
-              </div>
+              <ReminderCard key={reminder.id} reminder={reminder} />
             ))}
         </section>
       )}
