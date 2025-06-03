@@ -35,7 +35,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const reminderId = await  params.id;
+  const {id : reminderId} = await  params;
   try {
     const body = await req.json();
     const { title, note, time, date, frequency, category, status } = body;
