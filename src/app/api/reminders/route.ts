@@ -57,3 +57,5 @@ export async function POST(req: NextRequest) {
 }
 
 // const { data, statusCode } = await fetchReminders();
+
+export const revalidate = 0;

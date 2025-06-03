@@ -84,3 +84,5 @@ export async function DELETE(
 }
 
 // const { data, statusCode } = await fetchReminderById("reminder-id");
+
+export const revalidate = 0;

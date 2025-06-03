@@ -106,3 +106,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: 'Failed to seed DB.' }, { status: 500 });
   }
 }
+
+export const revalidate = 0;
