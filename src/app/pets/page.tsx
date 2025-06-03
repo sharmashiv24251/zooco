@@ -24,7 +24,7 @@ export default async function PetsPage() {
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-4 mb-10">
         {data &&
           data.length > 0 &&
           data.map((pet) => (

@@ -78,7 +78,9 @@ const PetDetailPage = async ({ params }: PageProps) => {
         >
           Edit Pet
         </Link>
+
         <DeleteButton type="pet" id={petId} />
+        <div className="h-20" />
       </div>
     </div>
   );
