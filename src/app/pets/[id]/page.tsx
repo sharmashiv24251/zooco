@@ -1,16 +1,18 @@
-import { fetchPetById } from "@/lib/network";
+import { deletePet, fetchPetById } from "@/lib/network";
 import { BackButton } from "@/components/back-button";
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarFallback } from "@/components/ui/avatar";
 import { Calendar, Clock } from "lucide-react";
+import DeleteButton from "@/components/delete-button";
 
 interface PageProps {
   params: { id: string };
 }
 
 const PetDetailPage = async ({ params }: PageProps) => {
-  const { data, statusCode } = await fetchPetById(params.id);
+  const { id: petId } = await params;
+  const { data, statusCode } = await fetchPetById(petId);
 
   if (!data || statusCode !== 200) {
     return (
@@ -71,11 +73,12 @@ const PetDetailPage = async ({ params }: PageProps) => {
         </div>
 
         <Link
-          href={`/pets/${params.id}/edit`}
+          href={`/pets/${petId}/edit`}
           className="block w-full bg-green-500 text-white text-xl py-4 rounded-xl font-semibold text-center hover:bg-green-600"
         >
           Edit Pet
         </Link>
+        <DeleteButton type="pet" id={petId} />
       </div>
     </div>
   );

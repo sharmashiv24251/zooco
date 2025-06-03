@@ -8,8 +8,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const reminderId = params.id;
     const reminder = await prisma.reminder.findUnique({
-      where: { id: params.id },
+      where: { id: reminderId },
       include: { pet: true }
     });
 
@@ -34,12 +35,13 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const reminderId = params.id;
   try {
     const body = await req.json();
     const { title, note, time, date, frequency, category, status } = body;
 
     const reminder = await prisma.reminder.update({
-      where: { id: params.id },
+      where: { id:reminderId },
       data: {
         title,
         note,

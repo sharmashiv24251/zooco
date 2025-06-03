@@ -8,7 +8,8 @@ interface PageProps {
 }
 
 const PetDetailPage = async ({ params }: PageProps) => {
-  const { data, statusCode } = await fetchPetById(params.id);
+  const petId = await params.id;
+  const { data, statusCode } = await fetchPetById(petId);
 
   if (!data || statusCode !== 200) {
     return (
@@ -27,7 +28,7 @@ const PetDetailPage = async ({ params }: PageProps) => {
       <p>{data?.age}</p>
 
       <Link
-        href={`/pets/${params.id}`}
+        href={`/pets/${petId}`}
         className="text-blue-500 hover:underline flex items-center space-x-2"
       >
         <span>Back to Pet</span>

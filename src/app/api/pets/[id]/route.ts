@@ -7,9 +7,10 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const {id: petId} = await params;
   try {
     const pet = await prisma.pet.findUnique({
-      where: { id: params.id },
+      where: { id: petId },
       include: { reminders: true }
     });
 
@@ -34,12 +35,13 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const petId = await params.id;
   try {
     const body = await req.json();
     const { name, breed, age } = body;
 
     const pet = await prisma.pet.update({
-      where: { id: params.id },
+      where: { id:petId },
       data: { name, breed, age },
       include: { reminders: true }
     });
@@ -58,15 +60,17 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
+
+  const {id: petId} = await params
   try {
     // First delete all reminders associated with the pet
     await prisma.reminder.deleteMany({
-      where: { petId: params.id }
+      where: { petId}
     });
 
     // Then delete the pet
     await prisma.pet.delete({
-      where: { id: params.id }
+      where: { id: petId}
     });
 
     return NextResponse.json({ success: true, message: 'Pet deleted successfully' });
