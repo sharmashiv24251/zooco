@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../../../lib/db/prisma';
 
@@ -79,6 +78,31 @@ export async function DELETE(
     console.error('[REMINDER_DELETE_ERROR]', error);
     return NextResponse.json(
       { success: false, error: 'Failed to delete reminder' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const reminderId = params.id;
+  try {
+    const body = await req.json();
+    const { status } = body;
+
+    const reminder = await prisma.reminder.update({
+      where: { id: reminderId },
+      data: { status },
+      include: { pet: true }
+    });
+
+    return NextResponse.json({ success: true, data: reminder });
+  } catch (error) {
+    console.error('[REMINDER_STATUS_UPDATE_ERROR]', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to update reminder status' },
       { status: 500 }
     );
   }

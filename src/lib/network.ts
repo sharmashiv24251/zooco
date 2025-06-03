@@ -165,3 +165,13 @@ export async function seedDatabase(): Promise<NetworkResponse<{ message: string 
     method: 'POST',
   });
 }
+
+export async function updateReminderStatus(
+  id: string, 
+  status: string
+): Promise<NetworkResponse<Reminder>> {
+  return baseFetch<Reminder>(API_ROUTES.reminderById(id), {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  });
+}
