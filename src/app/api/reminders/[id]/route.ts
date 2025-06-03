@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const reminderId = params.id;
+    const reminderId = await params.id;
     const reminder = await prisma.reminder.findUnique({
       where: { id: reminderId },
       include: { pet: true }
@@ -35,7 +35,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const reminderId = params.id;
+  const reminderId = await  params.id;
   try {
     const body = await req.json();
     const { title, note, time, date, frequency, category, status } = body;
@@ -87,7 +87,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const reminderId = params.id;
+  const reminderId = await params.id;
   try {
     const body = await req.json();
     const { status } = body;

@@ -20,7 +20,7 @@ export default async function RemindersPage() {
   const calendarDays = [26, 27, 28, 29, 30, 1, 2];
 
   return (
-    <main className="px-6 py-4.5 min-h-screen space-y-6">
+    <main className="px-6 py-4.5 min-h-screen space-y-6 pb-20">
       <h1 className="text-3xl font-bold text-gray-900">Reminders ⏰</h1>
 
       <div className="bg-emerald-400 rounded-xl p-4">
@@ -73,7 +73,7 @@ export default async function RemindersPage() {
       </section>
 
       {reminders && reminders.some((r) => r.status === "completed") && (
-        <section>
+        <section className="pb-10">
           <h2 className="text-lg font-semibold text-gray-600 mt-8 mb-3">
             Completed
           </h2>
