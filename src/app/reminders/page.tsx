@@ -1,6 +1,7 @@
 import ReminderCard from "@/components/reminder-card";
 import { fetchReminders } from "@/lib/network";
 import { format } from "date-fns";
+import Link from "next/link";
 
 export default async function RemindersPage() {
   const { data: reminders = [], error } = await fetchReminders();
@@ -86,6 +87,14 @@ export default async function RemindersPage() {
           </div>
         </section>
       )}
+
+      <Link
+        href="/reminders/add"
+        className="fixed bottom-20 right-6 w-14 h-14 bg-emerald-400 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:bg-emerald-500 transition-colors"
+        aria-label="Add new reminder"
+      >
+        +
+      </Link>
     </main>
   );
 }
