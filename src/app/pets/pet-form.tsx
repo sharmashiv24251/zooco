@@ -65,7 +65,7 @@ const PetForm = ({ initialData }: { initialData?: InitialData }) => {
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full p-4 rounded-xl border text-lg"
+            className="w-full p-4 rounded-xl border text-lg bg-white"
             placeholder="Enter pet name"
             required
             disabled={isSubmitting}
@@ -80,7 +80,7 @@ const PetForm = ({ initialData }: { initialData?: InitialData }) => {
             onChange={(e) =>
               setFormData({ ...formData, breed: e.target.value })
             }
-            className="w-full p-4 rounded-xl border text-lg"
+            className="w-full p-4 rounded-xl border bg-white text-lg"
             placeholder="Enter breed"
             required
             disabled={isSubmitting}
@@ -95,7 +95,7 @@ const PetForm = ({ initialData }: { initialData?: InitialData }) => {
             onChange={(e) =>
               setFormData({ ...formData, age: Number(e.target.value) })
             }
-            className="w-full p-4 rounded-xl border text-lg"
+            className="w-full p-4 rounded-xl bg-white border text-lg"
             required
             min="0"
             max="30"

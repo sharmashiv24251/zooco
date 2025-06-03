@@ -23,17 +23,6 @@ const PetDetailPage = async ({ params }: PageProps) => {
 
   return (
     <div>
-      <h1>{data?.name}</h1>
-      <p>{data?.breed}</p>
-      <p>{data?.age}</p>
-
-      <Link
-        href={`/pets/${petId}`}
-        className="text-blue-500 hover:underline flex items-center space-x-2"
-      >
-        <span>Back to Pet</span>
-        <Link2 className="h-4 w-4" />
-      </Link>
       {statusCode !== 200 && (
         <div className="bg-red-100 text-red-800 p-4 rounded-lg mt-4">
           <p>Error fetching pet details. Please try again later.</p>
@@ -45,7 +34,6 @@ const PetDetailPage = async ({ params }: PageProps) => {
         </div>
       )}
 
-      <Link href={`/pets/${data?.id}/edit`}>edit pet</Link>
       <PetForm initialData={data} />
     </div>
   );
