@@ -45,6 +45,7 @@ async function baseFetch<T>(
 ): Promise<NetworkResponse<T>> {
   try {
     const response = await fetch(BASE_URL + url, {
+cache: 'no-store', 
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,
