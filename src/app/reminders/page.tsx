@@ -77,11 +77,13 @@ export default async function RemindersPage() {
           <h2 className="text-lg font-semibold text-gray-600 mt-8 mb-3">
             Completed
           </h2>
-          {reminders
-            .filter((r) => r.status === "completed")
-            .map((reminder) => (
-              <ReminderCard key={reminder.id} reminder={reminder} />
-            ))}
+          <div className="space-y-4">
+            {reminders
+              .filter((r) => r.status === "completed")
+              .map((reminder) => (
+                <ReminderCard key={reminder.id} reminder={reminder} />
+              ))}
+          </div>
         </section>
       )}
     </main>
