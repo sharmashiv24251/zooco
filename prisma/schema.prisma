@@ -1,0 +1,31 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Pet {
+    id        String     @id @default(uuid())
+    name      String
+    breed     String
+    age       Int
+    reminders Reminder[]
+    createdAt DateTime   @default(now())
+}
+
+model Reminder {
+    id        String   @id @default(uuid())
+    title     String
+    note      String?
+    petId     String
+    pet       Pet      @relation(fields: [petId], references: [id])
+    time      String // HH:mm format
+    date      DateTime
+    frequency String // daily, weekly, etc.
+    category  String // general, health, lifestyle
+    status    String // pending, completed
+    createdAt DateTime @default(now())
+}
