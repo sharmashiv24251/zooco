@@ -1,6 +1,6 @@
 import { API_ROUTES } from "./api-paths";
 
-
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
 // Types
 export interface Pet {
   id: string;
@@ -44,7 +44,7 @@ async function baseFetch<T>(
   options?: RequestInit
 ): Promise<NetworkResponse<T>> {
   try {
-    const response = await fetch(url, {
+    const response = await fetch(BASE_URL + url, {
       headers: {
         'Content-Type': 'application/json',
         ...options?.headers,
