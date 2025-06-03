@@ -77,7 +77,9 @@ const PetForm = ({ initialData }: { initialData?: InitialData }) => {
           <input
             type="text"
             value={formData.breed}
-            onChange={(e) => setFormData({ ...formData, breed: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, breed: e.target.value })
+            }
             className="w-full p-4 rounded-xl border text-lg"
             placeholder="Enter breed"
             required
@@ -90,7 +92,9 @@ const PetForm = ({ initialData }: { initialData?: InitialData }) => {
           <input
             type="number"
             value={formData.age}
-            onChange={(e) => setFormData({ ...formData, age: Number(e.target.value) })}
+            onChange={(e) =>
+              setFormData({ ...formData, age: Number(e.target.value) })
+            }
             className="w-full p-4 rounded-xl border text-lg"
             required
             min="0"
@@ -104,7 +108,11 @@ const PetForm = ({ initialData }: { initialData?: InitialData }) => {
           disabled={isSubmitting}
           className="w-full bg-green-500 text-white text-xl py-4 rounded-xl font-semibold hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
         >
-          {isSubmitting ? "Saving..." : initialData ? "Save Changes" : "Add Pet"}
+          {isSubmitting
+            ? "Saving..."
+            : initialData
+            ? "Save Changes"
+            : "Add Pet"}
         </button>
       </form>
     </div>
