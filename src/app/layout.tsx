@@ -69,7 +69,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full flex flex-col`}
       >
-        {/* <InstallPrompt /> */}
+         <InstallPrompt /> 
         <div className="flex-1 pb-20">{children}</div>
         <Nav />
       </body>
